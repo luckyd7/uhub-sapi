@@ -1,0 +1,121 @@
+#%RAML 1.0
+title: uhub-sapi
+baseUri: http://localhost:8081/covid/v1
+
+traits:
+  correlation-id-header: !include /exchange_modules/8010e576-c4ac-4a3e-ad05-8f159f1be8a8/x-correlation-id-header/1.0.0/x-correlation-id-header.raml
+  transection-id-header: !include /exchange_modules/8010e576-c4ac-4a3e-ad05-8f159f1be8a8/x-transaction-id-header/1.0.0/x-transaction-id-header.raml
+  queryparam: !include /trais/covid-report-queryparam.raml
+uses:
+  uhub-sapi-data-types: uhub-sapi-data-types-library/uhub-sapi-data-types-library.raml
+  uho-common-data-types: /exchange_modules/8010e576-c4ac-4a3e-ad05-8f159f1be8a8/uho-comman-data-types-library/1.0.0/uho-common-data-types-library.raml
+  
+securitySchemes:
+  Oauth2.0: !include /exchange_modules/8010e576-c4ac-4a3e-ad05-8f159f1be8a8/oauth20-security-scheme/1.0.0/oauth20-security-scheme.raml
+/cases:
+  post:
+    description: This resource used to register a covid case.
+    is: [correlation-id-header,transection-id-header]
+    body:
+      application/json:
+        type: uhub-sapi-data-types.register-covid-case-data-types
+        example: !include examples/register-covid-case-example.json
+    responses:
+        200:
+           body:
+              application/json:
+                  type: uhub-sapi-data-types.register-covid-case-response-data-type
+                  example: !include /examples/200.json
+                  
+        400:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/400.json
+        503:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/503.json
+        500:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/500.json
+  put:
+    description: This resource used to update a covid case.
+    body:
+      application/xml:
+        type: uhub-sapi-data-types.update-covid-case-request-data-type
+        example: !include /examples/update-covid-case- example.xml
+    responses:
+      200:
+        body:
+          application/xml:
+            type: uhub-sapi-data-types.update-covid-case-response-data-type
+            example: !include /examples/200.xml
+      400:
+        body:
+          application/xml:
+            type: uhub-sapi-data-types.400-xml-data-type
+            example: !include /examples/400.xml
+      503:
+        body:
+          application/xml:
+            type: uhub-sapi-data-types.503-xml-data-type
+            example: !include /examples/503.xml
+      500:
+        body:
+          application/xml:
+            type: uhub-sapi-data-types.500-xml-data-type
+            example: !include /examples/500.xml
+
+/{nationalID}:
+    get:
+      description: To get covid cases by national id
+      is: [correlation-id-header,transection-id-header]
+      responses:
+        200:
+          body:
+            application/json:
+              type: uhub-sapi-data-types.get-response-by-national-id-data-type
+              example: !include /examples/national-id-200response.json
+        503:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/503.json 
+        500:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/500.json
+/reports: 
+  description: To get reports by state wise and if state not provided all states reports responded
+  get:
+    is: [correlation-id-header,transection-id-header,queryparam ]
+
+    responses:
+      200:
+        body:
+          application/json:
+            type: uhub-sapi-data-types.get-covid-reports-response-body-data-type
+            example: !include /examples/get200.json
+      503:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/503.json
+      500:
+          body:
+            application/json:
+              type: uho-common-data-types.error-response-type
+              example: !include /examples/500.json
+/health-check:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message": "uhub-sapi is alive and kicking response"}

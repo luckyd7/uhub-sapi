@@ -1,0 +1,10 @@
+%dw 2.0
+
+type auto_9abe2ac4_15a3_48b9_85ce_a7b853938df4_Output_Payload = {|
+  code: Null, 
+  message: Null, 
+  description: Null, 
+  date: String {"format": "yyyy-MM-dd 'T' HH:mm:ss'Z'"}, 
+  transectionId: Null
+|}
+

@@ -1,0 +1,387 @@
+#%RAML 1.0 Library
+usage: uhub sapi types
+types:
+  register-covid-case-data-types:
+    type: object
+    properties:
+          source: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 60
+            example: "The johns hopkins hospital"
+          caseType: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 20
+            example: "positive"
+          firstName: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 30
+            example: "John"
+          lastName: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 30
+            example: "Nixon"
+          phone: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 15
+          email: 
+            type: string
+            required: false
+            minLength: 0
+            maxLength: 50
+            example: "john@gmail.com"
+          dateOfBirth:
+            type: date-only
+            required: true
+            example: "1989-04-26"
+          nationalID: 
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 20
+            example: "209-49-6193"
+          nationalIDType:
+            type: string
+            required: true
+            minLength: 1
+            maxLength: 20
+            example: "SSN"
+          address:
+            type: object
+            properties:
+              streetAddress: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 50
+                example: "1600 Pennsylvania Avenue NW"
+              city: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 30
+                example: "Washington"
+              state: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 30
+                example: "DC"
+              postal: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 30
+                example: "20500"
+              country: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 30
+                example: "USA"
+  register-covid-case-response-data-type:
+                  properties:
+                    caseID: 
+                      type: string      
+                      example: "38774" 
+  update-covid-case-request-data-type:
+        type: object
+        xml:
+          name: covidCase
+        properties:
+              caseID: 
+                type: string
+                required: true
+                example: "3544"
+              source: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 60
+                example: "The johns hopkins hospital"
+              caseType: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 20
+                example: "positive"
+              firstName: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 20
+                example: "John"
+              lastName: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 20
+                example: "Nixon"
+              phone: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 12
+              email: 
+                type: string
+                required: false
+                minLength: 0
+                maxLength: 50
+                example: "john@gmail.com"
+              dateOfBirth:
+                type: date-only
+                required: true
+                example: "1989-04-26"
+              nationalID: 
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 20
+                example: "209-49-6193"
+              nationalIDType:
+                type: string
+                required: true
+                minLength: 1
+                maxLength: 20
+                example: "SSN"
+              address:
+                type: object
+                properties:
+                  streetAddress: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "1600 Pennsylvania Avenue NW"
+                  city: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "Washington"
+                  state: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "DC"
+                  postal: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "20500"
+                  country: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "USA"
+  update-covid-case-response-data-type:
+            xml:
+              name: response
+            properties:
+                  caseID: 
+                    type: string
+                    required: true
+                    example: "3544"
+  get-covid-reports-response-body-data-type:
+            type: array
+            items:
+              type: object
+              properties:
+                state:
+                  type: string
+                  example: "texas"
+                report:
+                  type: object
+                  properties:
+                    total:
+                      type: number
+                      example: 46744
+                    positive:
+                      type: number
+                      example: 436744
+                    recovered:
+                      type: number
+                      example: 433744
+                    death:
+                      type: number
+                      example: 300
+                    vaccinated:
+                      type: number
+                      example: 7847848
+  get-response-by-national-id-data-type:
+              items:
+                type: object
+                description: Contains each case object
+                properties:
+                  caseID:
+                    type: integer
+                    example: 3343
+                    required: true 
+                  source: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 60
+                    example: "The johns hopkins hospital"
+                  caseType: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 20
+                    example: "positive"
+                  firstName: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "John"
+                  lastName: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 30
+                    example: "Nixon"
+                  phone: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 15
+                  email: 
+                    type: string
+                    required: false
+                    minLength: 0
+                    maxLength: 50
+                    example: "john@gmail.com"
+                  dateOfBirth:
+                    type: date-only
+                    required: true
+                    example: "1989-04-26"
+                  nationalID: 
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 20
+                    example: "209-49-6193"
+                  nationalIDType:
+                    type: string
+                    required: true
+                    minLength: 1
+                    maxLength: 20
+                    example: "SSN"
+                  address:
+                    type: object
+                    properties:
+                      streetAddress: 
+                        type: string
+                        required: true
+                        minLength: 1
+                        maxLength: 50
+                        example: "1600 Pennsylvania Avenue NW"
+                      city: 
+                        type: string
+                        required: true
+                        minLength: 1
+                        maxLength: 30
+                        example: "Washington"
+                      state: 
+                        type: string
+                        required: true
+                        minLength: 1
+                        maxLength: 30
+                        example: "DC"
+                      postal: 
+                        type: string
+                        required: true
+                        minLength: 1
+                        maxLength: 30
+                        example: "20500"
+                      country: 
+                        type: string
+                        required: true
+                        minLength: 1
+                        maxLength: 30
+                        example: "USA"
+  400-xml-data-type:
+            xml:
+              name: response
+            properties:
+                  code:
+                    type: integer
+                    example: 400
+                    required: true 
+                  message:
+                    example: Bad Request
+                    type: string
+                    required: true
+                  description:
+                    example: field validation doesn't meet 
+                    type: string
+                    required: false
+                  dateTime:
+                    example: 2021-05-29T05:58:02Z
+                    type: datetime
+                    required: true
+                  transactionId:
+                    example: 44b32520-61ee-47b4-907d-fa15869f3c4d
+                    type: string
+                    required: true
+  500-xml-data-type:
+            xml:
+              name: response
+            properties:
+                  code:
+                    type: integer
+                    example: 500
+                    required: true 
+                  message:
+                    example: Service unavailable
+                    type: string
+                    required: true
+                  description:
+                    example: The (upstream) service is temporarily not available 
+                    type: string
+                    required: false
+                  dateTime:
+                    example: 2021-05-29T05:58:02Z
+                    type: datetime
+                    required: true
+                  transactionId:
+                    example: 44b32520-61ee-47b4-907d-fa15869f3c4d
+                    type: string
+                    required: true
+  503-xml-data-type:
+            xml:
+              name: response
+            properties:
+                  code:
+                    type: integer
+                    example: 503
+                    required: true 
+                  message:
+                    example: Service unavailable
+                    type: string
+                    required: true
+                  description:
+                    example: The (upstream) service is temporarily not available 
+                    type: string
+                    required: false
+                  dateTime:
+                    example: 2021-05-29T05:58:02Z
+                    type: datetime
+                    required: true
+                  transactionId:
+                    example: 44b32520-61ee-47b4-907d-fa15869f3c4d
+                    type: string
+                    required: true
